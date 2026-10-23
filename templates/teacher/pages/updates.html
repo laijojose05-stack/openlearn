@@ -1,0 +1,76 @@
+{% extends 'teacher/dashboard.html' %}
+
+{% block title %}Updates{% endblock %}
+{% block page_name %}Updates{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <span class="eyebrow"><i class="fa-solid fa-bullhorn"></i> Announcements</span>
+        <h1 class="page-title">Campus updates</h1>
+        <p class="page-sub">Post a notice and it appears on every student and parent dashboard.</p>
+    </div>
+</div>
+
+<div class="split">
+    <section class="panel">
+        <div class="panel-head">
+            <div>
+                <h2>Published updates</h2>
+                <p class="panel-sub">Newest announcements appear first.</p>
+            </div>
+            <span class="badge badge-brand">{{ updates|length if updates else 0 }} total</span>
+        </div>
+
+        {% if updates %}
+        <div class="updates-list">
+            {% for u in updates %}
+            <div class="update-item">
+                <span class="update-icon"><i class="fa-solid fa-bullhorn"></i></span>
+                <div class="update-copy">
+                    <p class="update-message">{{ u[1] }}</p>
+                    <p class="update-date">
+                        <i class="fa-regular fa-clock"></i>
+                        {{ u[2].strftime('%d %b %Y · %I:%M %p') if u[2] else 'Just now' }}
+                    </p>
+                </div>
+                <a href="/teacher/delete-update/{{ u[0] }}"
+                   class="update-delete"
+                   title="Delete update"
+                   data-confirm="Delete this update?">
+                    <i class="fa-solid fa-trash-can"></i>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fa-solid fa-bullhorn"></i>
+            <h3>No announcements yet</h3>
+            <p>Write your first update using the composer to keep everyone in the loop.</p>
+        </div>
+        {% endif %}
+    </section>
+
+    <aside class="panel form-panel composer">
+        <div class="panel-head">
+            <div>
+                <h2>New announcement</h2>
+                <p class="panel-sub">Keep it short and specific.</p>
+            </div>
+        </div>
+
+        <form method="POST">
+            <div class="field">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="e.g. Mid-semester exams begin Monday, 14 Oct. Check the timetable on the notice board." required></textarea>
+            </div>
+
+            <div class="composer-actions">
+                <span class="composer-hint"><i class="fa-solid fa-eye"></i> Visible to students &amp; parents</span>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Publish</button>
+            </div>
+        </form>
+    </aside>
+</div>
+{% endblock %}

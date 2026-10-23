@@ -1,0 +1,102 @@
+{% extends 'student/dashboard.html' %}
+
+{% block title %}Attendance{% endblock %}
+{% block page_name %}Attendance{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <span class="eyebrow"><i class="fa-solid fa-chart-simple"></i> My records</span>
+        <h1 class="page-title">Attendance</h1>
+        <p class="page-sub">A live view of every day your teacher has marked so far.</p>
+    </div>
+</div>
+
+<div class="attendance-stats">
+    <div class="stat-card">
+        <div class="stat-top">
+            <span class="stat-label">Total days</span>
+            <span class="stat-icon"><i class="fa-regular fa-calendar"></i></span>
+        </div>
+        <p class="stat-value">{{ total }}</p>
+        <p class="stat-foot"><i class="fa-solid fa-list-check"></i> Marked by faculty</p>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-top">
+            <span class="stat-label">Days present</span>
+            <span class="stat-icon green"><i class="fa-solid fa-user-check"></i></span>
+        </div>
+        <p class="stat-value">{{ present }}</p>
+        <p class="stat-foot"><i class="fa-solid fa-circle-check"></i> Verified records</p>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-top">
+            <span class="stat-label">Days absent</span>
+            <span class="stat-icon rose"><i class="fa-solid fa-user-xmark"></i></span>
+        </div>
+        <p class="stat-value">{{ total - present }}</p>
+        <p class="stat-foot"><i class="fa-solid fa-circle-info"></i> Keep improving</p>
+    </div>
+</div>
+
+<div class="attendance-layout mt-3">
+    <aside class="ring-card">
+        <div class="ring" style="--value: {{ percent }}">
+            <div class="ring-inner">
+                <span class="ring-value">{{ percent }}<small>%</small></span>
+                <span class="ring-label">Attendance</span>
+            </div>
+        </div>
+        <div>
+            <h3>Overall standing</h3>
+            <p>{{ present }} of {{ total }} marked days attended.</p>
+        </div>
+    </aside>
+
+    <section>
+        {% if attendance %}
+        <div class="table-wrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in attendance %}
+                    <tr>
+                        <td>
+                            <div class="person">
+                                <span class="avatar">{{ a.date.strftime('%d') }}</span>
+                                <div>
+                                    <span class="person-name">{{ a.date.strftime('%d %b %Y') }}</span>
+                                    <span class="person-meta">{{ a.date.strftime('%A') }}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            {% if a.status == 'Present' %}
+                            <span class="badge badge-success"><i class="fa-solid fa-circle-check"></i> Present</span>
+                            {% else %}
+                            <span class="badge badge-danger"><i class="fa-solid fa-circle-xmark"></i> {{ a.status }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p class="panel-sub mt-2"><i class="fa-solid fa-shield-halved"></i> These records are verified with your teacher's attendance uploads.</p>
+        {% else %}
+        <div class="empty-state">
+            <i class="fa-regular fa-calendar"></i>
+            <h3>No attendance yet</h3>
+            <p>Once your teacher uploads attendance for the class, your records will appear here.</p>
+        </div>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

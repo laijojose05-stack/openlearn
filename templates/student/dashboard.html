@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Student{% endblock %} — Open Learn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body class="role-student">
+
+<div class="app">
+    <div class="sidebar-scrim" data-sidebar-scrim></div>
+
+    <aside class="sidebar">
+        <a href="/student/home" class="sidebar-brand">
+            <span class="brand-mark"><i class="fa-solid fa-graduation-cap"></i></span>
+            <span class="brand-text">
+                <span class="brand-name">Open<span>Learn</span></span>
+                <span class="brand-role">Student</span>
+            </span>
+        </a>
+
+        <nav class="sidebar-nav">
+            <p class="nav-label">My learning</p>
+            <a href="/student/home" class="nav-link {{ 'active' if request.endpoint == 'student_home' }}">
+                <i class="fa-solid fa-house"></i> Home
+            </a>
+            <a href="/student/attendance" class="nav-link {{ 'active' if request.endpoint == 'student_attendance' }}">
+                <i class="fa-solid fa-chart-simple"></i> Attendance
+            </a>
+            <a href="/student/notes" class="nav-link {{ 'active' if request.endpoint == 'student_notes' }}">
+                <i class="fa-solid fa-file-lines"></i> Notes
+            </a>
+            <a href="/student/updates" class="nav-link {{ 'active' if request.endpoint == 'student_updates' }}">
+                <i class="fa-solid fa-bullhorn"></i> Announcements
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-card">
+                <span class="avatar">ST</span>
+                <div>
+                    <span class="user-name">Student account</span>
+                    <span class="user-meta">Enrolled learner</span>
+                </div>
+            </div>
+            <a href="/logout" class="logout-link"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign out</a>
+        </div>
+    </aside>
+
+    <div class="app-body">
+        <header class="topbar">
+            <button class="menu-btn" type="button" aria-label="Open menu" data-sidebar-toggle>
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="topbar-path">
+                <span>Student</span>
+                <i class="fa-solid fa-chevron-right"></i>
+                <strong>{% block page_name %}Home{% endblock %}</strong>
+            </div>
+
+            <div class="topbar-right">
+                <span class="topbar-pill"><i class="fa-solid fa-user-graduate"></i> Student</span>
+                <a href="/logout" class="icon-btn" title="Sign out"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+            </div>
+        </header>
+
+        <main class="content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/ui.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Teachers{% endblock %}
+{% block page_name %}All teachers{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <span class="eyebrow"><i class="fa-solid fa-users"></i> Directory</span>
+        <h1 class="page-title">Teachers</h1>
+        <p class="page-sub">Every faculty account, with the branch they currently lead.</p>
+    </div>
+    <div class="page-actions">
+        <a href="/admin/add-teacher" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Add teacher</a>
+    </div>
+</div>
+
+{% if teachers %}
+<div class="table-wrap">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Teacher</th>
+                <th>Email</th>
+                <th>Branch</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in teachers %}
+            <tr>
+                <td>
+                    <div class="person">
+                        <span class="avatar">{{ (t[1][:2] or 'TR')|upper }}</span>
+                        <div>
+                            <span class="person-name">{{ t[1] }}</span>
+                            <span class="person-meta">Faculty account</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="cell-muted">{{ t[2] }}</td>
+                <td>
+                    {% if t[3] %}
+                    <span class="badge badge-brand"><i class="fa-solid fa-code-branch"></i> {{ t[3] }}</span>
+                    {% else %}
+                    <span class="badge badge-warning"><i class="fa-solid fa-triangle-exclamation"></i> Not assigned</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<p class="panel-sub mt-2">{{ teachers|length }} teacher{{ '' if teachers|length == 1 else 's' }} in the directory.</p>
+{% else %}
+<div class="empty-state">
+    <i class="fa-solid fa-chalkboard-user"></i>
+    <h3>No teachers yet</h3>
+    <p>Add the first faculty account to start building the directory.</p>
+    <a href="/admin/add-teacher" class="btn btn-primary mt-2"><i class="fa-solid fa-user-plus"></i> Add teacher</a>
+</div>
+{% endif %}
+{% endblock %}

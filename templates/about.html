@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Open Learn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+</head>
+<body class="page-about">
+
+<header class="simple-nav">
+    <div class="simple-nav-inner">
+        <a href="/" class="brand">
+            <span class="brand-mark"><i class="fa-solid fa-graduation-cap"></i></span>
+            <span class="brand-name">Open<span>Learn</span></span>
+        </a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about" class="active">About</a>
+            <a href="/contact">Contact</a>
+        </nav>
+        <a href="/choose-login" class="btn btn-primary btn-sm">Sign in</a>
+    </div>
+</header>
+
+<main class="page-wrap">
+    <section class="page-hero">
+        <span class="eyebrow"><i class="fa-solid fa-seedling"></i> Our story</span>
+        <h1>Learning should feel<br><span class="highlight">effortless.</span></h1>
+        <p>
+            Open Learn is a modern learning management system built as a final-year project.
+            It gives institutions one calm, reliable place to manage teachers, students,
+            attendance and learning materials.
+        </p>
+    </section>
+
+    <section class="value-grid">
+        <article class="value-card">
+            <span class="value-icon"><i class="fa-solid fa-bullseye"></i></span>
+            <h2>Our mission</h2>
+            <p>To simplify digital learning with software that stays out of the way and lets people focus on teaching and learning.</p>
+        </article>
+
+        <article class="value-card">
+            <span class="value-icon cyan"><i class="fa-solid fa-binoculars"></i></span>
+            <h2>Our vision</h2>
+            <p>Smart, accessible education systems for every institution — regardless of size or budget.</p>
+        </article>
+
+        <article class="value-card">
+            <span class="value-icon amber"><i class="fa-solid fa-code"></i></span>
+            <h2>Under the hood</h2>
+            <p>Built with HTML, CSS, JavaScript, Python Flask and MySQL — a small, dependable stack.</p>
+        </article>
+    </section>
+
+    <section class="principle-panel">
+        <div class="principle-copy">
+            <span class="eyebrow"><i class="fa-solid fa-heart"></i> What we believe</span>
+            <h2>Clarity beats complexity.</h2>
+            <p>
+                Every screen in Open Learn is designed around one question: what does this person
+                need to do next? No clutter, no guesswork — just the right information at the right moment.
+            </p>
+        </div>
+
+        <div class="principle-list">
+            <div class="principle-item">
+                <span class="principle-icon"><i class="fa-solid fa-check"></i></span>
+                <div>
+                    <h3>Purposeful</h3>
+                    <p>Every module maps to a real classroom task.</p>
+                </div>
+            </div>
+            <div class="principle-item">
+                <span class="principle-icon"><i class="fa-solid fa-check"></i></span>
+                <div>
+                    <h3>Accessible</h3>
+                    <p>Responsive layouts that work on any screen.</p>
+                </div>
+            </div>
+            <div class="principle-item">
+                <span class="principle-icon"><i class="fa-solid fa-check"></i></span>
+                <div>
+                    <h3>Dependable</h3>
+                    <p>Simple data flows, fewer surprises.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stack-strip">
+        <span class="badge badge-brand"><i class="fa-brands fa-html5"></i> HTML</span>
+        <span class="badge badge-brand"><i class="fa-brands fa-css3-alt"></i> CSS</span>
+        <span class="badge badge-brand"><i class="fa-brands fa-js"></i> JavaScript</span>
+        <span class="badge badge-brand"><i class="fa-brands fa-python"></i> Flask</span>
+        <span class="badge badge-brand"><i class="fa-solid fa-database"></i> MySQL</span>
+    </section>
+
+    <div class="page-foot">
+        <a href="/" class="btn btn-ghost"><i class="fa-solid fa-arrow-left"></i> Back to home</a>
+        <a href="/choose-login" class="btn btn-primary">Open your workspace</a>
+    </div>
+</main>
+
+<footer class="simple-footer">
+    <p>&copy; 2024 Open Learn. LMS project.</p>
+    <div>
+        <a href="/">Home</a>
+        <a href="/contact">Contact</a>
+        <a href="/choose-login">Sign in</a>
+    </div>
+</footer>
+
+</body>
+</html>

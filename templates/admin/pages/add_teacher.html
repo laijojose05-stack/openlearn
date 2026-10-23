@@ -1,0 +1,53 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Add teacher{% endblock %}
+{% block page_name %}Add teacher{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <span class="eyebrow"><i class="fa-solid fa-user-plus"></i> Faculty</span>
+        <h1 class="page-title">Add a teacher</h1>
+        <p class="page-sub">Create login credentials for a new faculty member. They can be assigned to a branch afterwards.</p>
+    </div>
+    <div class="page-actions">
+        <a href="/admin/teachers" class="btn btn-ghost"><i class="fa-solid fa-arrow-left"></i> Back to directory</a>
+    </div>
+</div>
+
+<section class="panel form-panel">
+    <div class="panel-head">
+        <div>
+            <h2>Teacher details</h2>
+            <p class="panel-sub">All three fields are required.</p>
+        </div>
+    </div>
+
+    {% if error %}
+    <div class="alert alert-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span>{{ error }}</span>
+    </div>
+    {% endif %}
+
+    <form method="POST">
+        <div class="field">
+            <label for="name">Full name</label>
+            <input id="name" type="text" name="name" placeholder="e.g. Meera Krishnan" required>
+        </div>
+
+        <div class="field">
+            <label for="email">Email address</label>
+            <input id="email" type="email" name="email" placeholder="teacher@institution.edu" required>
+        </div>
+
+        <div class="field">
+            <label for="password">Temporary password</label>
+            <input id="password" type="password" name="password" placeholder="Create a password" required>
+            <p class="field-hint">Share this with the teacher so they can sign in.</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add teacher</button>
+    </form>
+</section>
+{% endblock %}

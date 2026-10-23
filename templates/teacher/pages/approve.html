@@ -1,0 +1,58 @@
+{% extends 'teacher/dashboard.html' %}
+
+{% block title %}Approve students{% endblock %}
+{% block page_name %}Approve students{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <span class="eyebrow"><i class="fa-solid fa-user-check"></i> Registrations</span>
+        <h1 class="page-title">Pending approvals</h1>
+        <p class="page-sub">Students in your branch appear here until you approve their account.</p>
+    </div>
+</div>
+
+{% if students %}
+<div class="table-wrap">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Student</th>
+                <th>Register no.</th>
+                <th class="cell-right">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in students %}
+            <tr>
+                <td>
+                    <div class="person">
+                        <span class="avatar">{{ (s[1][:2] or 'ST')|upper }}</span>
+                        <div>
+                            <span class="person-name">{{ s[1] }}</span>
+                            <span class="person-meta">Awaiting approval</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="cell-muted">{{ s[3] }}</td>
+                <td class="cell-right">
+                    <a href="/teacher/approve/{{ s[0] }}" class="btn btn-success btn-sm">
+                        <i class="fa-solid fa-check"></i> Approve
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<p class="panel-sub mt-2">{{ students|length }} registration{{ '' if students|length == 1 else 's' }} waiting for review.</p>
+{% else %}
+<div class="empty-state">
+    <i class="fa-solid fa-circle-check"></i>
+    <h3>All caught up</h3>
+    <p>There are no pending student registrations for your branch right now.</p>
+    <a href="/teacher/home" class="btn btn-ghost mt-2"><i class="fa-solid fa-house"></i> Back to home</a>
+</div>
+{% endif %}
+{% endblock %}

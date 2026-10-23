@@ -1,0 +1,108 @@
+{% extends 'teacher/dashboard.html' %}
+
+{% block title %}Teacher home{% endblock %}
+{% block page_name %}Home{% endblock %}
+
+{% block content %}
+<section class="welcome-banner">
+    <div class="welcome-copy">
+        <span class="welcome-eyebrow"><i class="fa-solid fa-hand-sparkles"></i> Teacher workspace</span>
+        <h1>Welcome, {{ name }}.</h1>
+        <p>Your classroom tools are ready. Approve students, share materials and keep attendance current.</p>
+        <div class="welcome-meta">
+            <span class="welcome-chip"><i class="fa-solid fa-code-branch"></i> Department: {{ branch or 'Not assigned' }}</span>
+            <span class="welcome-chip"><i class="fa-solid fa-shield-halved"></i> Faculty access</span>
+        </div>
+    </div>
+
+    <div class="welcome-actions">
+        <a href="/teacher/attendance" class="btn btn-primary"><i class="fa-solid fa-clipboard-check"></i> Mark attendance</a>
+        <a href="/teacher/notes" class="btn btn-ghost"><i class="fa-solid fa-file-arrow-up"></i> Upload notes</a>
+    </div>
+</section>
+
+<div class="quick-grid">
+    <a href="/teacher/approve" class="quick-card">
+        <span class="quick-icon green"><i class="fa-solid fa-user-check"></i></span>
+        <span class="quick-body">
+            <h3>Approve students</h3>
+            <p>Review new registrations for your branch.</p>
+        </span>
+        <i class="fa-solid fa-chevron-right quick-arrow"></i>
+    </a>
+
+    <a href="/teacher/attendance" class="quick-card">
+        <span class="quick-icon cyan"><i class="fa-solid fa-clipboard-check"></i></span>
+        <span class="quick-body">
+            <h3>Attendance</h3>
+            <p>Mark today's class in a single pass.</p>
+        </span>
+        <i class="fa-solid fa-chevron-right quick-arrow"></i>
+    </a>
+
+    <a href="/teacher/notes" class="quick-card">
+        <span class="quick-icon amber"><i class="fa-solid fa-file-arrow-up"></i></span>
+        <span class="quick-body">
+            <h3>Notes &amp; materials</h3>
+            <p>Upload documents for students to download.</p>
+        </span>
+        <i class="fa-solid fa-chevron-right quick-arrow"></i>
+    </a>
+
+    <a href="/teacher/updates" class="quick-card">
+        <span class="quick-icon rose"><i class="fa-solid fa-bullhorn"></i></span>
+        <span class="quick-body">
+            <h3>Announcements</h3>
+            <p>Post exam schedules and class reminders.</p>
+        </span>
+        <i class="fa-solid fa-chevron-right quick-arrow"></i>
+    </a>
+</div>
+
+<div class="mt-4 split">
+    <section class="panel">
+        <div class="panel-head">
+            <div>
+                <h2>How your workspace fits together</h2>
+                <p class="panel-sub">A quick tour of the tools you'll use most.</p>
+            </div>
+        </div>
+
+        <div class="note-list">
+            <div class="note-item">
+                <span class="note-icon"><i class="fa-solid fa-user-check"></i></span>
+                <div class="note-body">
+                    <p class="note-title">Approve students first</p>
+                    <p class="note-meta">New students can't sign in until you approve them for your branch.</p>
+                </div>
+            </div>
+
+            <div class="note-item">
+                <span class="note-icon"><i class="fa-solid fa-file-arrow-up"></i></span>
+                <div class="note-body">
+                    <p class="note-title">Upload clear materials</p>
+                    <p class="note-meta">Use descriptive titles so students can find the right notes quickly.</p>
+                </div>
+            </div>
+
+            <div class="note-item">
+                <span class="note-icon"><i class="fa-solid fa-bullhorn"></i></span>
+                <div class="note-body">
+                    <p class="note-title">Keep students informed</p>
+                    <p class="note-meta">Announcements appear instantly on student and parent dashboards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <aside class="side-panel">
+        <h3>Quick tips</h3>
+        <ul class="tip-list">
+            <li><i class="fa-solid fa-circle-check"></i> Approve students before marking attendance.</li>
+            <li><i class="fa-solid fa-circle-check"></i> Attendance can only be uploaded once per day.</li>
+            <li><i class="fa-solid fa-circle-check"></i> Students and parents see verified attendance.</li>
+            <li><i class="fa-solid fa-circle-check"></i> Remove outdated announcements when they expire.</li>
+        </ul>
+    </aside>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Assign branch{% endblock %}
+{% block page_name %}Assign branch{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <span class="eyebrow"><i class="fa-solid fa-link"></i> Assignment</span>
+        <h1 class="page-title">Assign a branch</h1>
+        <p class="page-sub">Only teachers without a branch appear in this list.</p>
+    </div>
+    <div class="page-actions">
+        <a href="/admin/unassign" class="btn btn-ghost"><i class="fa-solid fa-link-slash"></i> Unassign instead</a>
+    </div>
+</div>
+
+{% if teachers %}
+<section class="panel form-panel">
+    <div class="panel-head">
+        <div>
+            <h2>New assignment</h2>
+            <p class="panel-sub">{{ teachers|length }} teacher{{ '' if teachers|length == 1 else 's' }} waiting for a branch.</p>
+        </div>
+    </div>
+
+    <form method="POST">
+        <div class="field">
+            <label for="teacher_id">Teacher</label>
+            <select id="teacher_id" name="teacher_id" required>
+                {% for t in teachers %}
+                <option value="{{ t[0] }}">{{ t[1] }} — {{ t[2] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="branch">Branch</label>
+            <select id="branch" name="branch" required>
+                <option value="" disabled selected>Select a branch</option>
+                <option value="CE">CE — Computer Engineering</option>
+                <option value="CT">CT — Computer Technology</option>
+                <option value="ECE">ECE — Electronics &amp; Communication</option>
+                <option value="EEE">EEE — Electrical &amp; Electronics</option>
+                <option value="ME">ME — Mechanical Engineering</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-link"></i> Assign branch</button>
+    </form>
+</section>
+{% else %}
+<div class="empty-state">
+    <i class="fa-solid fa-circle-check"></i>
+    <h3>Everyone is assigned</h3>
+    <p>There are no unassigned teachers right now. New teachers will appear here automatically.</p>
+    <a href="/admin/teachers" class="btn btn-ghost mt-2"><i class="fa-solid fa-users"></i> View directory</a>
+</div>
+{% endif %}
+{% endblock %}

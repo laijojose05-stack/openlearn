@@ -1,0 +1,59 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}Attendance{% endblock %}
+{% block page_name %}Attendance{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <span class="eyebrow"><i class="fa-solid fa-chart-simple"></i> Attendance record</span>
+        <h1 class="page-title">Daily attendance</h1>
+        <p class="page-sub">Every day marked by the class teacher, newest first.</p>
+    </div>
+    <div class="page-actions">
+        <a href="{{ url_for('parent_dashboard') }}" class="btn btn-ghost"><i class="fa-solid fa-arrow-left"></i> Overview</a>
+    </div>
+</div>
+
+{% if attendance %}
+<div class="table-wrap">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in attendance %}
+            <tr>
+                <td>
+                    <div class="person">
+                        <span class="avatar">{{ a.date.strftime('%d') }}</span>
+                        <div>
+                            <span class="person-name">{{ a.date.strftime('%d %b %Y') }}</span>
+                            <span class="person-meta">{{ a.date.strftime('%A') }}</span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    {% if a.status == 'Present' %}
+                    <span class="badge badge-success"><i class="fa-solid fa-circle-check"></i> Present</span>
+                    {% else %}
+                    <span class="badge badge-danger"><i class="fa-solid fa-circle-xmark"></i> {{ a.status }}</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="empty-state">
+    <i class="fa-regular fa-calendar"></i>
+    <h3>No attendance records</h3>
+    <p>Once the class teacher uploads attendance, the day-by-day record will appear here.</p>
+    <a href="{{ url_for('parent_dashboard') }}" class="btn btn-ghost mt-2"><i class="fa-solid fa-house"></i> Back to overview</a>
+</div>
+{% endif %}
+{% endblock %}

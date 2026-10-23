@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sign in{% endblock %} — Open Learn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body class="auth-page {% block body_class %}{% endblock %}">
+
+<div class="auth-shell">
+    <aside class="auth-aside">
+        <div class="aside-glow" aria-hidden="true"></div>
+
+        <a href="/" class="auth-brand">
+            <span class="brand-mark"><i class="fa-solid fa-graduation-cap"></i></span>
+            <span class="brand-name">Open<span>Learn</span></span>
+        </a>
+
+        <div class="aside-body">
+            <span class="aside-role">
+                <i class="{% block aside_icon %}fa-solid fa-user{% endblock %}"></i>
+                {% block aside_role %}Open Learn{% endblock %}
+            </span>
+
+            <h1>{% block aside_heading %}Learning made simple.{% endblock %}</h1>
+            <p>{% block aside_text %}One calm workspace for everything happening in your classroom.{% endblock %}</p>
+
+            <ul class="aside-points">
+                {% block aside_points %}
+                <li><i class="fa-solid fa-circle-check"></i> Attendance in one glance</li>
+                <li><i class="fa-solid fa-circle-check"></i> Notes available anytime</li>
+                <li><i class="fa-solid fa-circle-check"></i> Announcements that reach you</li>
+                {% endblock %}
+            </ul>
+        </div>
+
+        <p class="aside-foot">&copy; 2024 Open Learn · LMS project</p>
+    </aside>
+
+    <main class="auth-main">
+        <div class="auth-topbar">
+            <a href="/choose-login" class="back-link"><i class="fa-solid fa-arrow-left"></i> All roles</a>
+            <a href="/" class="home-link">Home <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+
+        <div class="auth-card">
+            {% block auth_content %}{% endblock %}
+        </div>
+
+        <p class="auth-foot">Protected by role-based access · Open Learn</p>
+    </main>
+</div>
+
+</body>
+</html>

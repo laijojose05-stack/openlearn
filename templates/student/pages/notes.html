@@ -1,0 +1,43 @@
+{% extends 'student/dashboard.html' %}
+
+{% block title %}Notes{% endblock %}
+{% block page_name %}Notes{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <span class="eyebrow"><i class="fa-solid fa-file-lines"></i> Study materials</span>
+        <h1 class="page-title">Notes</h1>
+        <p class="page-sub">Documents shared by your teachers, available whenever you need them.</p>
+    </div>
+    {% if notes %}
+    <div class="page-actions">
+        <span class="badge badge-muted"><i class="fa-solid fa-folder-open"></i> {{ notes|length }} file{{ '' if notes|length == 1 else 's' }}</span>
+    </div>
+    {% endif %}
+</div>
+
+{% if notes %}
+<div class="note-list">
+    {% for n in notes %}
+    <div class="note-item">
+        <span class="note-icon"><i class="fa-solid fa-file-pdf"></i></span>
+        <div class="note-body">
+            <p class="note-title">{{ n[2] }}</p>
+            <p class="note-meta">{{ n[3] }}</p>
+        </div>
+        <a href="/{{ n[3] }}" target="_blank" class="btn btn-soft btn-sm">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Open
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+    <i class="fa-solid fa-folder-open"></i>
+    <h3>No notes available</h3>
+    <p>Your teacher hasn't uploaded any materials yet. Check back after your next class.</p>
+    <a href="/student/home" class="btn btn-ghost mt-2"><i class="fa-solid fa-house"></i> Back to home</a>
+</div>
+{% endif %}
+{% endblock %}

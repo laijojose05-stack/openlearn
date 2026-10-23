@@ -1,0 +1,73 @@
+{% extends 'teacher/dashboard.html' %}
+
+{% block title %}Notes{% endblock %}
+{% block page_name %}Notes{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <span class="eyebrow"><i class="fa-solid fa-file-arrow-up"></i> Materials</span>
+        <h1 class="page-title">Notes &amp; materials</h1>
+        <p class="page-sub">Upload PDF or Word documents for every approved student in your branch.</p>
+    </div>
+</div>
+
+<div class="split">
+    <section class="panel">
+        <div class="panel-head">
+            <div>
+                <h2>Your uploads</h2>
+                <p class="panel-sub">Students can open these files from their dashboard.</p>
+            </div>
+            <span class="badge badge-brand">{{ notes|length if notes else 0 }} file{{ '' if notes and notes|length == 1 else 's' }}</span>
+        </div>
+
+        {% if notes %}
+        <div class="note-list">
+            {% for n in notes %}
+            <div class="note-item">
+                <span class="note-icon"><i class="fa-solid fa-file-pdf"></i></span>
+                <div class="note-body">
+                    <p class="note-title">{{ n[2] }}</p>
+                    <p class="note-meta">{{ n[3] }}</p>
+                </div>
+                <a href="/{{ n[3] }}" target="_blank" class="btn btn-soft btn-sm">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> View
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fa-solid fa-file-circle-plus"></i>
+            <h3>No uploads yet</h3>
+            <p>Upload your first document using the form to make it available to students.</p>
+        </div>
+        {% endif %}
+    </section>
+
+    <aside class="panel form-panel">
+        <div class="panel-head">
+            <div>
+                <h2>Upload a file</h2>
+                <p class="panel-sub">PDF, DOC or DOCX.</p>
+            </div>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data" class="notes-form">
+            <div class="field">
+                <label for="title">Title</label>
+                <input id="title" type="text" name="title" placeholder="e.g. Data Structures — Unit 4" required>
+            </div>
+
+            <div class="field">
+                <label for="file">File</label>
+                <input id="file" type="file" name="file" accept=".pdf,.doc,.docx" required>
+                <p class="field-hint">Use a descriptive file name for easier browsing.</p>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-cloud-arrow-up"></i> Upload notes</button>
+        </form>
+    </aside>
+</div>
+{% endblock %}

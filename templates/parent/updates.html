@@ -1,0 +1,41 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}Updates{% endblock %}
+{% block page_name %}Updates{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <span class="eyebrow"><i class="fa-solid fa-bullhorn"></i> Campus notices</span>
+        <h1 class="page-title">Updates</h1>
+        <p class="page-sub">Announcements from the school, newest first.</p>
+    </div>
+    <div class="page-actions">
+        <a href="{{ url_for('parent_dashboard') }}" class="btn btn-ghost"><i class="fa-solid fa-arrow-left"></i> Overview</a>
+    </div>
+</div>
+
+{% if updates %}
+<div class="updates-list">
+    {% for u in updates %}
+    <div class="update-item">
+        <span class="update-icon"><i class="fa-solid fa-bullhorn"></i></span>
+        <div class="update-copy">
+            <p class="update-message">{{ u.message }}</p>
+            <p class="update-date">
+                <i class="fa-regular fa-clock"></i>
+                Posted {{ u.created_at.strftime('%d %b %Y · %I:%M %p') if u.created_at else 'recently' }}
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+    <i class="fa-solid fa-bullhorn"></i>
+    <h3>No updates yet</h3>
+    <p>When the school posts an announcement, it will appear here.</p>
+    <a href="{{ url_for('parent_dashboard') }}" class="btn btn-ghost mt-2"><i class="fa-solid fa-house"></i> Back to overview</a>
+</div>
+{% endif %}
+{% endblock %}

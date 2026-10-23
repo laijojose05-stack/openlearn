@@ -1,0 +1,64 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Unassign branch{% endblock %}
+{% block page_name %}Unassign branch{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <span class="eyebrow"><i class="fa-solid fa-link-slash"></i> Assignment</span>
+        <h1 class="page-title">Unassign a branch</h1>
+        <p class="page-sub">Removing a branch takes away the teacher's access to that department's students.</p>
+    </div>
+    <div class="page-actions">
+        <a href="/admin/assign" class="btn btn-ghost"><i class="fa-solid fa-link"></i> Assign instead</a>
+    </div>
+</div>
+
+{% if teachers %}
+<div class="table-wrap">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Teacher</th>
+                <th>Current branch</th>
+                <th class="cell-right">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in teachers %}
+            <tr>
+                <td>
+                    <div class="person">
+                        <span class="avatar">{{ (t[1][:2] or 'TR')|upper }}</span>
+                        <div>
+                            <span class="person-name">{{ t[1] }}</span>
+                            <span class="person-meta">{{ t[2] }}</span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="badge badge-brand"><i class="fa-solid fa-code-branch"></i> {{ t[3] }}</span>
+                </td>
+                <td class="cell-right">
+                    <form method="POST">
+                        <input type="hidden" name="teacher_id" value="{{ t[0] }}">
+                        <button type="submit" class="btn btn-danger btn-sm" data-confirm="Unassign {{ t[1] }} from {{ t[3] }}?">
+                            <i class="fa-solid fa-link-slash"></i> Unassign
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="empty-state">
+    <i class="fa-solid fa-link-slash"></i>
+    <h3>No assigned teachers</h3>
+    <p>Assign a teacher to a branch first, then they'll show up here.</p>
+    <a href="/admin/assign" class="btn btn-primary mt-2"><i class="fa-solid fa-link"></i> Assign a branch</a>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}Parent overview{% endblock %}
+{% block page_name %}Overview{% endblock %}
+
+{% block content %}
+<section class="welcome-banner">
+    <div class="welcome-copy">
+        <span class="welcome-eyebrow"><i class="fa-solid fa-hand-sparkles"></i> Parent workspace</span>
+        <h1>Welcome, {{ parent.name }}.</h1>
+        <p>Here's how {{ student.name }} is doing — attendance and campus updates, all in one view.</p>
+        <div class="welcome-meta">
+            <span class="welcome-chip"><i class="fa-solid fa-user-graduate"></i> {{ student.name }}</span>
+            <span class="welcome-chip"><i class="fa-solid fa-hashtag"></i> {{ student.regno }}</span>
+        </div>
+    </div>
+
+    <div class="welcome-actions">
+        <a href="{{ url_for('parent_attendance') }}" class="btn btn-primary"><i class="fa-solid fa-chart-simple"></i> View attendance</a>
+        <a href="{{ url_for('parent_updates') }}" class="btn btn-ghost"><i class="fa-solid fa-bullhorn"></i> Read updates</a>
+    </div>
+</section>
+
+<div class="grid grid-3">
+    <div class="overview-card">
+        <span class="avatar">{{ (student.name[:2] or 'ST')|upper }}</span>
+        <div>
+            <h3>{{ student.name }}</h3>
+            <p>Student</p>
+        </div>
+    </div>
+
+    <div class="overview-card">
+        <span class="avatar" style="background:linear-gradient(135deg,#0891b2,#06b6d4)">
+            <i class="fa-solid fa-hashtag"></i>
+        </span>
+        <div>
+            <h3>{{ student.regno }}</h3>
+            <p>Register number</p>
+        </div>
+    </div>
+
+    <div class="overview-card">
+        <span class="avatar" style="background:linear-gradient(135deg,#059669,#34d399)">
+            <i class="fa-solid fa-chart-simple"></i>
+        </span>
+        <div>
+            <h3>{{ attendance_percent }}%</h3>
+            <p>Overall attendance</p>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4 split">
+    <section class="panel">
+        <div class="panel-head">
+            <div>
+                <h2>Attendance snapshot</h2>
+                <p class="panel-sub">A quick read on this term.</p>
+            </div>
+            <span class="badge {{ 'badge-success' if attendance_percent >= 75 else 'badge-warning' }}">
+                <i class="fa-solid fa-circle-check"></i> {{ attendance_percent }}%
+            </span>
+        </div>
+
+        <div class="progress {{ 'green' if attendance_percent >= 75 else '' }}" style="height:12px">
+            <span style="width: {{ attendance_percent }}%"></span>
+        </div>
+
+        <p class="panel-sub mt-2">
+            {% if attendance_percent >= 75 %}
+            Attendance is healthy. Keep encouraging consistent class participation.
+            {% else %}
+            Attendance is below 75%. A quick conversation with the class teacher may help.
+            {% endif %}
+        </p>
+
+        <div class="quick-grid mt-3">
+            <a href="{{ url_for('parent_attendance') }}" class="quick-card">
+                <span class="quick-icon cyan"><i class="fa-solid fa-calendar-check"></i></span>
+                <span class="quick-body">
+                    <h3>Day-by-day records</h3>
+                    <p>See exactly which days were marked present.</p>
+                </span>
+                <i class="fa-solid fa-chevron-right quick-arrow"></i>
+            </a>
+
+            <a href="{{ url_for('parent_updates') }}" class="quick-card">
+                <span class="quick-icon rose"><i class="fa-solid fa-bullhorn"></i></span>
+                <span class="quick-body">
+                    <h3>Campus announcements</h3>
+                    <p>Exam schedules, deadlines and notices.</p>
+                </span>
+                <i class="fa-solid fa-chevron-right quick-arrow"></i>
+            </a>
+        </div>
+    </section>
+
+    <aside class="side-panel">
+        <h3>Good to know</h3>
+        <ul class="tip-list">
+            <li><i class="fa-solid fa-circle-check"></i> Attendance updates only after the teacher uploads it.</li>
+            <li><i class="fa-solid fa-circle-check"></i> Announcements are posted by faculty and admins.</li>
+            <li><i class="fa-solid fa-circle-check"></i> Contact the class teacher for any record disputes.</li>
+        </ul>
+    </aside>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'auth_base.html' %}
+
+{% block title %}Administrator login{% endblock %}
+{% block body_class %}role-admin{% endblock %}
+{% block aside_icon %}fa-solid fa-user-shield{% endblock %}
+{% block aside_role %}Administrator access{% endblock %}
+{% block aside_heading %}Keep the campus running smoothly.{% endblock %}
+{% block aside_text %}Manage teachers, assign branches and keep every department staffed from one secure console.{% endblock %}
+{% block aside_points %}
+<li><i class="fa-solid fa-circle-check"></i> Teacher directory</li>
+<li><i class="fa-solid fa-circle-check"></i> Branch assignments</li>
+<li><i class="fa-solid fa-circle-check"></i> Full oversight</li>
+{% endblock %}
+
+{% block auth_content %}
+<span class="auth-icon"><i class="fa-solid fa-user-shield"></i></span>
+<h2>Administrator sign in</h2>
+<p class="auth-sub">Restricted access for campus administrators.</p>
+
+{% if error %}
+<div class="alert alert-error">
+    <i class="fa-solid fa-circle-exclamation"></i>
+    <span>{{ error }}</span>
+</div>
+{% endif %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert alert-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span>{{ messages[0] }}</span>
+    </div>
+    {% endif %}
+{% endwith %}
+
+<form method="POST" action="{{ url_for('login_admin') }}">
+    <div class="field">
+        <label for="email">Email address</label>
+        <input id="email" type="email" name="email" placeholder="admin@openlearn.app" autocomplete="username" required>
+    </div>
+
+    <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg btn-block">
+        Sign in <i class="fa-solid fa-arrow-right"></i>
+    </button>
+</form>
+
+<div class="auth-links">
+    <span>Not an administrator?</span>
+    <a href="/choose-login">Return to role selection</a>
+</div>
+{% endblock %}

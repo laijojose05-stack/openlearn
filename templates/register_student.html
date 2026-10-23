@@ -1,0 +1,70 @@
+{% extends 'auth_base.html' %}
+
+{% block title %}Student registration{% endblock %}
+{% block body_class %}role-student{% endblock %}
+{% block aside_icon %}fa-solid fa-user-graduate{% endblock %}
+{% block aside_role %}Student registration{% endblock %}
+{% block aside_heading %}Start learning in a few minutes.{% endblock %}
+{% block aside_text %}Create your account, wait for your branch teacher to approve it, and your dashboard will be ready.{% endblock %}
+
+{% block auth_content %}
+<span class="auth-icon"><i class="fa-solid fa-user-plus"></i></span>
+<h2>Create your account</h2>
+<p class="auth-sub">You'll be able to sign in once a teacher approves you.</p>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ 'error' if category == 'error' else 'success' }}">
+            <i class="fa-solid {{ 'fa-circle-exclamation' if category == 'error' else 'fa-circle-check' }}"></i>
+            <span>{{ message }}</span>
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<form method="POST" action="{{ url_for('register_student') }}">
+    <div class="field">
+        <label for="name">Full name</label>
+        <input id="name" type="text" name="name" placeholder="Aarav Sharma" autocomplete="name" required>
+    </div>
+
+    <div class="form-grid">
+        <div class="field">
+            <label for="phone">Phone number</label>
+            <input id="phone" type="tel" name="phone" placeholder="98765 43210" autocomplete="tel" required>
+        </div>
+
+        <div class="field">
+            <label for="regno">Register number</label>
+            <input id="regno" type="text" name="regno" placeholder="CE2024001" required>
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="branch">Branch</label>
+        <select id="branch" name="branch" required>
+            <option value="" disabled selected>Select your branch</option>
+            <option value="CE">CE — Computer Engineering</option>
+            <option value="CT">CT — Computer Technology</option>
+            <option value="ECE">ECE — Electronics &amp; Communication</option>
+            <option value="EEE">EEE — Electrical &amp; Electronics</option>
+            <option value="ME">ME — Mechanical Engineering</option>
+        </select>
+    </div>
+
+    <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" placeholder="Create a password" autocomplete="new-password" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg btn-block">
+        Create account <i class="fa-solid fa-arrow-right"></i>
+    </button>
+</form>
+
+<div class="auth-links">
+    <span>Already registered?</span>
+    <a href="{{ url_for('login_student') }}">Sign in instead</a>
+</div>
+{% endblock %}

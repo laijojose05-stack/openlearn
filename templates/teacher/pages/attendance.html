@@ -1,0 +1,71 @@
+{% extends 'teacher/dashboard.html' %}
+
+{% block title %}Attendance{% endblock %}
+{% block page_name %}Attendance{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <span class="eyebrow"><i class="fa-solid fa-clipboard-check"></i> Today's class</span>
+        <h1 class="page-title">Mark attendance</h1>
+        <p class="page-sub">Set a status for each approved student, then save once for the whole class.</p>
+    </div>
+</div>
+
+{% if message %}
+<div class="alert {{ 'alert-info' if 'already' in message else 'alert-success' }}" data-dismiss>
+    <i class="fa-solid {{ 'fa-circle-info' if 'already' in message else 'fa-circle-check' }}"></i>
+    <span>{{ message }}</span>
+</div>
+{% endif %}
+
+{% if students %}
+<form method="POST" class="attendance-form">
+    <div class="table-wrap">
+        <table class="table attendance-table">
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Register no.</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in students %}
+                <tr>
+                    <td>
+                        <div class="person">
+                            <span class="avatar">{{ (s[1][:2] or 'ST')|upper }}</span>
+                            <div>
+                                <span class="person-name">{{ s[1] }}</span>
+                                <span class="person-meta">Approved student</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="cell-muted">{{ s[2] }}</td>
+                    <td>
+                        <select name="status_{{ s[0] }}">
+                            <option value="Present">Present</option>
+                            <option value="Absent">Absent</option>
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="save-bar">
+        <p><i class="fa-solid fa-circle-info"></i> Attendance can be uploaded once per day. Review before saving.</p>
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save attendance</button>
+    </div>
+</form>
+{% else %}
+<div class="empty-state">
+    <i class="fa-solid fa-user-graduate"></i>
+    <h3>No approved students</h3>
+    <p>Approve students in your branch first, then you'll be able to mark their attendance.</p>
+    <a href="/teacher/approve" class="btn btn-primary mt-2"><i class="fa-solid fa-user-check"></i> Approve students</a>
+</div>
+{% endif %}
+{% endblock %}

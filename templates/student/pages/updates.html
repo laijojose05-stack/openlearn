@@ -1,0 +1,43 @@
+{% extends 'student/dashboard.html' %}
+
+{% block title %}Announcements{% endblock %}
+{% block page_name %}Announcements{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <span class="eyebrow"><i class="fa-solid fa-bullhorn"></i> Campus notices</span>
+        <h1 class="page-title">Latest updates</h1>
+        <p class="page-sub">Announcements from your teachers, newest first.</p>
+    </div>
+    {% if updates %}
+    <div class="page-actions">
+        <span class="badge badge-muted"><i class="fa-solid fa-bell"></i> {{ updates|length }} announcement{{ '' if updates|length == 1 else 's' }}</span>
+    </div>
+    {% endif %}
+</div>
+
+{% if updates %}
+<div class="updates-list">
+    {% for u in updates %}
+    <div class="update-item">
+        <span class="update-icon"><i class="fa-solid fa-bullhorn"></i></span>
+        <div class="update-copy">
+            <p class="update-message">{{ u[0] }}</p>
+            <p class="update-date">
+                <i class="fa-regular fa-clock"></i>
+                Posted {{ u[1].strftime('%d %b %Y · %I:%M %p') if u[1] else 'recently' }}
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+    <i class="fa-solid fa-bullhorn"></i>
+    <h3>No announcements yet</h3>
+    <p>When your teacher posts an update, it will appear here automatically.</p>
+    <a href="/student/home" class="btn btn-ghost mt-2"><i class="fa-solid fa-house"></i> Back to home</a>
+</div>
+{% endif %}
+{% endblock %}

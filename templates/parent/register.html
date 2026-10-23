@@ -1,0 +1,46 @@
+{% extends 'auth_base.html' %}
+
+{% block title %}Parent registration{% endblock %}
+{% block body_class %}role-parent{% endblock %}
+{% block aside_icon %}fa-solid fa-people-roof{% endblock %}
+{% block aside_role %}Parent registration{% endblock %}
+{% block aside_heading %}One link to their whole term.{% endblock %}
+{% block aside_text %}Connect your account with your child's register number to follow attendance and campus updates.{% endblock %}
+
+{% block auth_content %}
+<span class="auth-icon"><i class="fa-solid fa-user-plus"></i></span>
+<h2>Create parent account</h2>
+<p class="auth-sub">Link your account using your child's register number.</p>
+
+<form method="POST" action="{{ url_for('register_parent') }}">
+    <div class="field">
+        <label for="name">Your name</label>
+        <input id="name" type="text" name="name" placeholder="Parent / guardian name" autocomplete="name" required>
+    </div>
+
+    <div class="field">
+        <label for="email">Email address</label>
+        <input id="email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+    </div>
+
+    <div class="field">
+        <label for="regno">Student register number</label>
+        <input id="regno" type="text" name="regno" placeholder="CE2024001" required>
+        <p class="field-hint">Use the same register number your child used to register.</p>
+    </div>
+
+    <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" placeholder="Create a password" autocomplete="new-password" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg btn-block">
+        Create account <i class="fa-solid fa-arrow-right"></i>
+    </button>
+</form>
+
+<div class="auth-links">
+    <span>Already registered?</span>
+    <a href="{{ url_for('login_parent') }}">Sign in instead</a>
+</div>
+{% endblock %}

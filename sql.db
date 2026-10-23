@@ -1,0 +1,92 @@
+
+CREATE DATABASE IF NOT EXISTS openlearn;
+USE openlearn;
+
+-- ---------------- ADMIN ----------------
+CREATE TABLE admin (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(100),
+    password VARCHAR(255)
+);
+
+INSERT INTO admin (email, password)
+VALUES ('admin@openlearn.com', 'admin123');
+
+
+-- ---------------- TEACHERS ----------------
+CREATE TABLE teachers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    password VARCHAR(255),
+    branch VARCHAR(10)
+);
+
+
+-- ---------------- STUDENTS ----------------
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    phone VARCHAR(15),
+    regno VARCHAR(50) UNIQUE,
+    branch VARCHAR(10),
+    password VARCHAR(255),
+    approved INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT '2000-01-01 00:00:00',
+    last_login TIMESTAMP NULL DEFAULT NULL
+);
+
+
+-- ---------------- NOTES ----------------
+CREATE TABLE notes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    teacher_id INT,
+    title VARCHAR(200),
+    file_path VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (teacher_id) REFERENCES teachers(id)
+        ON DELETE CASCADE
+);
+
+
+-- ---------------- NOTIFICATIONS ----------------
+CREATE TABLE notifications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- ---------------- ATTENDANCE ----------------
+CREATE TABLE attendance (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT NOT NULL,
+    date DATE NOT NULL,
+    status ENUM('Present', 'Absent') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    UNIQUE KEY unique_attendance (student_id, date),
+
+    CONSTRAINT attendance_student_fk
+        FOREIGN KEY (student_id)
+        REFERENCES students(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+
+-- ---------------- PARENTS ----------------
+CREATE TABLE parents (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    regno VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_parent_student
+        FOREIGN KEY (regno)
+        REFERENCES students(regno)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);

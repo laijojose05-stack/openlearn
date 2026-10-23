@@ -1,0 +1,120 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Admin dashboard{% endblock %}
+{% block page_name %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <span class="eyebrow"><i class="fa-solid fa-gauge-high"></i> Overview</span>
+        <h1 class="page-title">Campus at a glance</h1>
+        <p class="page-sub">Teacher assignments, student records and branch coverage — all in one place.</p>
+    </div>
+    <div class="page-actions">
+        <a href="/admin/add-teacher" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Add teacher</a>
+    </div>
+</div>
+
+<div class="grid grid-auto">
+    <div class="stat-card">
+        <div class="stat-top">
+            <span class="stat-label">Total teachers</span>
+            <span class="stat-icon"><i class="fa-solid fa-chalkboard-user"></i></span>
+        </div>
+        <p class="stat-value">{{ total_teachers }}</p>
+        <p class="stat-foot"><i class="fa-solid fa-users"></i> Faculty accounts</p>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-top">
+            <span class="stat-label">Assigned</span>
+            <span class="stat-icon green"><i class="fa-solid fa-link"></i></span>
+        </div>
+        <p class="stat-value">{{ assigned_teachers }}</p>
+        <p class="stat-foot"><i class="fa-solid fa-circle-check"></i> Active branch coverage</p>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-top">
+            <span class="stat-label">Unassigned</span>
+            <span class="stat-icon amber"><i class="fa-solid fa-link-slash"></i></span>
+        </div>
+        <p class="stat-value">{{ unassigned_teachers }}</p>
+        <p class="stat-foot">
+            {% if unassigned_teachers %}
+            <i class="fa-solid fa-triangle-exclamation" style="color:#d97706"></i> Needs a branch
+            {% else %}
+            <i class="fa-solid fa-check"></i> Everyone is assigned
+            {% endif %}
+        </p>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-top">
+            <span class="stat-label">Students</span>
+            <span class="stat-icon cyan"><i class="fa-solid fa-user-graduate"></i></span>
+        </div>
+        <p class="stat-value">{{ total_students }}</p>
+        <p class="stat-foot"><i class="fa-solid fa-school"></i> Registered learners</p>
+    </div>
+</div>
+
+<div class="mt-4 split">
+    <section class="panel">
+        <div class="panel-head">
+            <div>
+                <h2>Quick actions</h2>
+                <p class="panel-sub">Keep the teacher directory in order.</p>
+            </div>
+        </div>
+
+        <div class="quick-grid">
+            <a href="/admin/teachers" class="quick-card">
+                <span class="quick-icon"><i class="fa-solid fa-users"></i></span>
+                <span class="quick-body">
+                    <h3>Teacher directory</h3>
+                    <p>Browse every teacher and their assigned branch.</p>
+                </span>
+                <i class="fa-solid fa-chevron-right quick-arrow"></i>
+            </a>
+
+            <a href="/admin/add-teacher" class="quick-card">
+                <span class="quick-icon green"><i class="fa-solid fa-user-plus"></i></span>
+                <span class="quick-body">
+                    <h3>Add a teacher</h3>
+                    <p>Create a new faculty account with login details.</p>
+                </span>
+                <i class="fa-solid fa-chevron-right quick-arrow"></i>
+            </a>
+
+            <a href="/admin/assign" class="quick-card">
+                <span class="quick-icon amber"><i class="fa-solid fa-link"></i></span>
+                <span class="quick-body">
+                    <h3>Assign branch</h3>
+                    <p>Attach an unassigned teacher to a department.</p>
+                </span>
+                <i class="fa-solid fa-chevron-right quick-arrow"></i>
+            </a>
+
+            <a href="/admin/unassign" class="quick-card">
+                <span class="quick-icon rose"><i class="fa-solid fa-link-slash"></i></span>
+                <span class="quick-body">
+                    <h3>Unassign branch</h3>
+                    <p>Remove a teacher from their current department.</p>
+                </span>
+                <i class="fa-solid fa-chevron-right quick-arrow"></i>
+            </a>
+        </div>
+    </section>
+
+    <aside class="side-panel">
+        <h3>Admin checklist</h3>
+        <ul class="tip-list">
+            <li><i class="fa-solid fa-circle-check"></i> Add a teacher account for every new faculty member.</li>
+            <li><i class="fa-solid fa-circle-check"></i> Assign each teacher to exactly one branch.</li>
+            <li><i class="fa-solid fa-circle-check"></i> Unassign only when a teacher changes department.</li>
+            <li><i class="fa-solid fa-circle-check"></i> Teachers approve their own branch's students.</li>
+        </ul>
+    </aside>
+</div>
+{% endblock %}

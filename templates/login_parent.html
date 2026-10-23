@@ -1,0 +1,42 @@
+{% extends 'auth_base.html' %}
+
+{% block title %}Parent login{% endblock %}
+{% block body_class %}role-parent{% endblock %}
+{% block aside_icon %}fa-solid fa-people-roof{% endblock %}
+{% block aside_role %}Parent access{% endblock %}
+{% block aside_heading %}Stay close to their progress.{% endblock %}
+{% block aside_text %}Follow your child's attendance and keep up with every campus notice — without chasing anyone for updates.{% endblock %}
+
+{% block auth_content %}
+<span class="auth-icon"><i class="fa-solid fa-people-roof"></i></span>
+<h2>Parent sign in</h2>
+<p class="auth-sub">Sign in with your registered email address.</p>
+
+{% if error %}
+<div class="alert alert-error">
+    <i class="fa-solid fa-circle-exclamation"></i>
+    <span>{{ error }}</span>
+</div>
+{% endif %}
+
+<form method="POST" action="{{ url_for('login_parent') }}">
+    <div class="field">
+        <label for="email">Email address</label>
+        <input id="email" type="email" name="email" placeholder="you@example.com" autocomplete="username" required>
+    </div>
+
+    <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg btn-block">
+        Sign in <i class="fa-solid fa-arrow-right"></i>
+    </button>
+</form>
+
+<div class="auth-links">
+    <span>New parent?</span>
+    <a href="{{ url_for('register_parent') }}">Create an account</a>
+</div>
+{% endblock %}

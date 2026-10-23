@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in — Open Learn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/choose_login.css') }}">
+</head>
+<body class="page-choose">
+
+<header class="choose-nav">
+    <div class="choose-nav-inner">
+        <a href="/" class="brand">
+            <span class="brand-mark"><i class="fa-solid fa-graduation-cap"></i></span>
+            <span class="brand-name">Open<span>Learn</span></span>
+        </a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About us</a>
+            <a href="/contact">Contact</a>
+        </nav>
+        <a href="/" class="btn btn-ghost btn-sm"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </div>
+</header>
+
+<main class="choose-wrap">
+    <div class="choose-head">
+        <span class="eyebrow"><i class="fa-solid fa-arrow-right-to-bracket"></i> Welcome back</span>
+        <h1>Whom do you wish<br>to sign in as?</h1>
+        <p>Choose your role to open the right workspace.</p>
+    </div>
+
+    <div class="role-cards">
+        <a href="/login-student" class="role-card role-student">
+            <span class="role-icon"><i class="fa-solid fa-user-graduate"></i></span>
+            <div class="role-body">
+                <h2>Student</h2>
+                <p>Attendance, notes and announcements for your branch.</p>
+            </div>
+            <span class="role-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
+        <a href="/login-teacher" class="role-card role-teacher">
+            <span class="role-icon"><i class="fa-solid fa-chalkboard-user"></i></span>
+            <div class="role-body">
+                <h2>Teacher</h2>
+                <p>Approve students, upload materials and mark attendance.</p>
+            </div>
+            <span class="role-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
+        <a href="/login-parent" class="role-card role-parent">
+            <span class="role-icon"><i class="fa-solid fa-people-roof"></i></span>
+            <div class="role-body">
+                <h2>Parent</h2>
+                <p>Follow your child's attendance and campus updates.</p>
+            </div>
+            <span class="role-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+    </div>
+
+    <div class="choose-foot">
+        <p>No account yet? <a href="/register">Register as a student</a> or <a href="/register-parent">as a parent</a>.</p>
+        <a href="/login-admin" class="admin-link"><i class="fa-solid fa-user-shield"></i> Administrator login</a>
+    </div>
+</main>
+
+<footer class="choose-footer">
+    <p>&copy; 2024 Open Learn. LMS project.</p>
+    <div>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/">Home</a>
+    </div>
+</footer>
+
+</body>
+</html>

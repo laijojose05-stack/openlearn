@@ -1,0 +1,69 @@
+.dashboard {
+  margin-left: 260px;
+  padding: 40px;
+}
+
+.title {
+  font-size: 30px;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* GRID */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* CARD */
+.stat-card {
+  background: white;
+  border-radius: 18px;
+  padding: 25px;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+}
+
+/* COLORS */
+.stat-card.blue { border-left: 6px solid #5f7cff; }
+.stat-card.green { border-left: 6px solid #2ecc71; }
+.stat-card.purple { border-left: 6px solid #9b59b6; }
+
+/* ICON */
+.icon {
+  font-size: 40px;
+}
+
+/* TEXT */
+.stat-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #777;
+}
+
+.stat-card h2 {
+  margin: 6px 0 0;
+  font-size: 28px;
+}
+
+/* PROGRESS */
+.progress {
+  margin-top: 8px;
+  height: 8px;
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #5f7cff, #00c6ff);
+}

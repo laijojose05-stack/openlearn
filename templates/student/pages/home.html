@@ -1,0 +1,93 @@
+{% extends 'student/dashboard.html' %}
+
+{% block title %}Student home{% endblock %}
+{% block page_name %}Home{% endblock %}
+
+{% block content %}
+<section class="welcome-banner">
+    <div class="welcome-copy">
+        <span class="welcome-eyebrow"><i class="fa-solid fa-hand-sparkles"></i> Student workspace</span>
+        <h1>Welcome back, {{ name }}.</h1>
+        <p>Everything you need for class is right here — attendance, notes and the latest announcements.</p>
+        <div class="welcome-meta">
+            <span class="welcome-chip"><i class="fa-solid fa-code-branch"></i> Branch: {{ branch }}</span>
+            <span class="welcome-chip"><i class="fa-solid fa-shield-halved"></i> Approved student</span>
+        </div>
+    </div>
+
+    <div class="welcome-actions">
+        <a href="/student/attendance" class="btn btn-primary"><i class="fa-solid fa-chart-simple"></i> View attendance</a>
+        <a href="/student/notes" class="btn btn-ghost"><i class="fa-solid fa-file-lines"></i> Browse notes</a>
+    </div>
+</section>
+
+<div class="grid grid-2">
+    <a href="/student/notes" class="stat-card" style="text-decoration:none;color:inherit">
+        <div class="stat-top">
+            <span class="stat-label">New notes</span>
+            <span class="stat-icon amber"><i class="fa-solid fa-file-lines"></i></span>
+        </div>
+        <p class="stat-value">{{ new_notes }}</p>
+        <p class="stat-foot"><i class="fa-solid fa-arrow-right"></i> Added since your last visit</p>
+    </a>
+
+    <a href="/student/updates" class="stat-card" style="text-decoration:none;color:inherit">
+        <div class="stat-top">
+            <span class="stat-label">New announcements</span>
+            <span class="stat-icon cyan"><i class="fa-solid fa-bullhorn"></i></span>
+        </div>
+        <p class="stat-value">{{ new_updates }}</p>
+        <p class="stat-foot"><i class="fa-solid fa-arrow-right"></i> Posted since your last visit</p>
+    </a>
+</div>
+
+<div class="mt-4 split">
+    <section class="panel">
+        <div class="panel-head">
+            <div>
+                <h2>Your shortcuts</h2>
+                <p class="panel-sub">Jump straight to what you need.</p>
+            </div>
+        </div>
+
+        <div class="quick-grid">
+            <a href="/student/attendance" class="quick-card">
+                <span class="quick-icon cyan"><i class="fa-solid fa-chart-simple"></i></span>
+                <span class="quick-body">
+                    <h3>Attendance</h3>
+                    <p>See your percentage and daily records.</p>
+                </span>
+                <i class="fa-solid fa-chevron-right quick-arrow"></i>
+            </a>
+
+            <a href="/student/notes" class="quick-card">
+                <span class="quick-icon amber"><i class="fa-solid fa-file-lines"></i></span>
+                <span class="quick-body">
+                    <h3>Notes</h3>
+                    <p>Download materials shared by your teacher.</p>
+                </span>
+                <i class="fa-solid fa-chevron-right quick-arrow"></i>
+            </a>
+
+            <a href="/student/updates" class="quick-card">
+                <span class="quick-icon rose"><i class="fa-solid fa-bullhorn"></i></span>
+                <span class="quick-body">
+                    <h3>Announcements</h3>
+                    <p>Read the latest campus notices.</p>
+                </span>
+                <i class="fa-solid fa-chevron-right quick-arrow"></i>
+            </a>
+        </div>
+    </section>
+
+    <aside class="side-panel">
+        <h3>Stay on track</h3>
+        <ul class="tip-list">
+            <li><i class="fa-solid fa-circle-check"></i> Check attendance regularly — it updates after every class.</li>
+            <li><i class="fa-solid fa-circle-check"></i> Download notes before class for easier revision.</li>
+            <li><i class="fa-solid fa-circle-check"></i> Announcements include exam dates and deadlines.</li>
+            <li><i class="fa-solid fa-circle-check"></i> Contact your teacher if something looks incorrect.</li>
+        </ul>
+    </aside>
+</div>
+{% endblock %}
