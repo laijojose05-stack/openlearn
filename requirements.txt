@@ -63,7 +63,7 @@ python-dotenv==1.1.0
 pyttsx3==2.99
 pytweening==1.2.0
 pywhatkit==5.4
-pywin32==312
+pywin32==312; sys_platform == "win32"
 repath==0.9.0
 requests==2.34.2
 six==1.17.0
