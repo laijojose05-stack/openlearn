@@ -10,15 +10,22 @@ app = Flask(__name__)
 app.secret_key = "openlearn123"
 
 # ---------------- CONFIG ----------------
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '1234'
-app.config['MYSQL_DB'] = 'openlearn'
+app.config['MYSQL_HOST'] = os.environ.get('MYSQL_HOST', 'localhost')
+app.config['MYSQL_USER'] = os.environ.get('MYSQL_USER', 'root')
+app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD', '1234')
+app.config['MYSQL_DB'] = os.environ.get('MYSQL_DB', 'openlearn')
+app.config['MYSQL_PORT'] = int(os.environ.get('MYSQL_PORT', 3306))
 
-UPLOAD_FOLDER = 'static/uploads/notes'
+UPLOAD_FOLDER = os.path.join('static', 'uploads', 'notes')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 mysql = MySQL(app)
+
+# Health check for Render
+@app.route('/health')
+def health():
+    return {'status': 'ok'}, 200
 
 # ---------------- HOME ----------------
 
