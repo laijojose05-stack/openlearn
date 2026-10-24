@@ -56,7 +56,7 @@ PyGetWindow==0.0.9
 PyMsgBox==2.0.1
 PyMySQL==1.1.0
 pyperclip==1.11.0
-pypiwin32==223
+pywin32==312; sys_platform == "win32"
 PyRect==0.2.0
 PyScreeze==1.0.1
 python-dotenv==1.1.0
