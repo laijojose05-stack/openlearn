@@ -629,7 +629,7 @@ def login_parent():
             session['parent'] = parent['id']   # ✅ store parent id
             return redirect('/parent/dashboard')
 
-        # ❌ login failed
+        # login failed
         return render_template(
             'login_parent.html',
             error="Invalid email or password"
